@@ -3,32 +3,6 @@
 # Description:
 - O projeto de um protocolo de rede para permitir o compartilhamento de arquivos entre clientes através de um servidor.
 - Desse modo, os clientes podem enviar arquivos pro servidor e solicitar arquivos dele.
-# Tutorial: Como rodar a imagem do projeto a partir de um contêiner do Docker Hub
-
-## Pré-requisitos:
-- [Docker](https://www.docker.com/) instalado e configurado em seu ambiente.
-
-## Passo 1: Pesquise a imagem desejada no Docker Hub
-- Veja a imagem desse projeto no meu repositório do .
-
-## Passo 2: Baixe a imagem Docker
-- Abra um terminal ou prompt de comando e execute o seguinte comando com o Docker rodando em seu PC:
-  
-    ```
-    docker pull   
-    ```
-
-## Passo 3: Execute o container
-- Após o download da imagem, execute o seguinte comando para iniciar o container:
-    ```
-    docker run -p 
-    ```
-
-- Este comando irá iniciar o container e redirecionar as solicitações HTTP para a porta 8080 do host.
-
-## Passo 4: Acesse a aplicação
-- Abra um navegador web e acesse `http://localhost:8081/` para acessar a aplicação.
-
 
 ## Operações disponíveis:
 
@@ -49,9 +23,9 @@
 
     {"operation": "list"}
 
-    {"operation": "remove", "file_name": "name"} {"operation": "upload", "file_path": "/test.txt"}
+    {"operation": "remove", "file_name": "name"}
 
-    {"operation": "upload", "file_path": "D:\Programação\Projetos\Python\socketshare\client\testsend.txt"}
+    {"operation": "upload", "file_path": "D:\caminho-do-arquivo"}
 
     {"operation": "download", "file_name": "test.text"}
 
@@ -61,4 +35,4 @@
 
     {"operation": "list_clients"}
 
-    {"operation": "q"} {"operation": "download", "file_name": "pycharm-community-2023.1.exe"}
+    {"operation": "q"}
