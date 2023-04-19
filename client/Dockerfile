@@ -3,8 +3,6 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY /server .
+COPY . .
 
-EXPOSE 8081
-
-CMD ["python", "socket_server.py"]
+CMD ["python", "client.py", "0.0.0.0", "8081"]
