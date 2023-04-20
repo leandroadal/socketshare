@@ -1,14 +1,6 @@
-import socket
-import os
 import json
-# import uuid   para gerar um 'id' aleatório independente de quantos cliente abram
-
-HOST = 'localhost'
-PORT = 8081
-
-# Inicia o socket
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect((HOST, PORT))
+import os
+import socket
 
 
 def send_request(request_dict):
@@ -111,26 +103,26 @@ def download_file(request_dict):
 
 # {"operation": "list"}
 # {"operation": "remove", "file_name": "name"}
-# {"operation": "upload", "file_path": "/test.txt"}
-# {"operation": "upload", "file_path": "D:\Programação\Projetos\Python\socketshare\client\test.txt"}
-# {"operation": "download", "file_name": "utils.py"}
+# {"operation": "upload", "file_path": "testsend.txt"}
+# {"operation": "download", "file_name": "test.txt"}
 # {"operation": "history"}
 # {"operation": "register", "name": "name"}
 # {"operation": "list_clients"}
-# {"operation": "q"} {"operation": "download", "file_name": "pycharm-community-2023.1.exe"}
+# {"operation": "q"}
 def run():
     while True:
         try:
             command = input('Enter command (list, remove, upload, download, history, register, list_clients; '
                             'q to quit): ')
+            # Sair
+            if command == 'q':
+                print('Saindo do Programa...')
+                break
+            # Formatando a string para o path ficar compatível com o JSON
             command = command.replace("\\", "/")
             command_dict = json.loads(command)
-            # print(command_dict)
 
-            if command_dict['operation'] == 'q':
-                break
-
-            elif command_dict['operation'] == 'list' or command_dict['operation'] == 'remove' or \
+            if command_dict['operation'] == 'list' or command_dict['operation'] == 'remove' or \
                     command_dict['operation'] == 'history' or command_dict['operation'] == 'register' or \
                     command_dict['operation'] == 'list_clients':
                 print(send_recv(command_dict))
@@ -147,4 +139,12 @@ def run():
     client_socket.close()
 
 
-run()
+if __name__ == "__main__":
+    HOST = 'localhost'
+    PORT = 8081
+
+    # Inicia o socket
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect((HOST, PORT))
+
+    run()
