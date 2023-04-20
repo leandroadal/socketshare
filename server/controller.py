@@ -1,8 +1,5 @@
-import json
-import uuid
-
-from exceptions.exceptions import Unauthorized, OperationUnavailable, UserRegister
 from operations import ServerOperations
+from exceptions.exceptions import Unauthorized, UserRegister, OperationUnavailable
 from utils import send_response, save_history, check_register
 
 
@@ -87,34 +84,3 @@ def control_operations(client_socket, request_dict, client_names, client_address
         response_dict = {'status': 'error', 'code': '500', 'message': f'Unexpected error occurred: {str(e)}'}
         save_history(request_dict, response_dict, client_names, client_address, history)
         send_response(client_socket, response_dict)
-
-
-# Trata do recebimento dos comandos dos clientes e o tratamento de erros que os desconecta do servidor
-def recv_operation(client_socket, address, client_names, history):
-    print(f'Connection from {address} established.')
-    client_address = f'{address[0]}:{address[1]}'
-    client_names[client_address] = 'Unknown'
-    while True:
-        try:
-            recv_command = client_socket.recv(1024).decode()
-            if not recv_command:  # Quando o client desconecta
-                raise ConnectionResetError
-            request_dict = json.loads(recv_command)
-
-            request_id = str(uuid.uuid4())  # Gerando um ID aleatório
-            request_dict['requestId'] = request_id
-
-            # Envia os comandos para a função que gerencia as funções que representam as operações do servidor
-            control_operations(client_socket, request_dict, client_names, client_address, history)
-
-        except ConnectionResetError:
-            print(f"Connection with {address} lost")
-            del client_names[client_address]
-            client_socket.close()
-            break
-        except json.decoder.JSONDecodeError as e:
-            print('Badly formatted JSON')
-            print(f"Connection with {address} lost. {e}")
-            del client_names[client_address]  # para continuar na lista de clientes
-            client_socket.close()
-            break
