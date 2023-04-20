@@ -10,8 +10,8 @@
 - [Docker](https://www.docker.com/) instalado e configurado em seu ambiente.
 
 ## Passo 1: Pesquise a imagem desejada no Docker Hub
-- Veja a imagem desse projeto no meu repositório do [Docker Hub](https://hub.docker.com/r/leandroadal/web-service-jpa-h2).
-
+- Veja a imagem desse projeto no meu repositório do [Docker Hub - servidor](https://hub.docker.com/r/leandroadal/socket-server).
+- Veja a imagem desse projeto no meu repositório do [Docker Hub - cliente](https://hub.docker.com/r/leandroadal/socket-client).
 ## Passo 2: Baixe a imagem Docker
 - Abra um terminal ou prompt de comando e execute o seguinte comando com o Docker rodando em seu PC:
   
@@ -31,13 +31,16 @@
     docker run --name socket-client --network host -it socket-client
     ```
 
-- Este comando irá iniciar o container e redirecionar as solicitações HTTP para a porta 8080 do host.
+- Este comando irá iniciar o programa e esperara o primeiro comando ao servidor.
 
-## Passo 4: Acesse a aplicação
-- Com os container `socket-server` e `socket-client` rodando em sua máquina execute a seguinte instrução em um terminal
-  ```
-  docker attach socket-client
-  ```
+## Passo 4: Acesse novamente a aplicação
+
+  - Caso queria acessar a aplicação em momento posterior siga a instrução abaixo:
+
+  - Com os container `socket-server` e `socket-client` rodando em sua máquina execute a seguinte instrução em um terminal
+    ```
+    docker attach socket-client
+    ```
 
 ## Operações disponíveis:
 
@@ -71,3 +74,7 @@
     {"operation": "list_clients"}
 
     q
+
+### Respostas do servidor ao cliente
+
+- See wiki in [wiki](https://www.docker.com/)
