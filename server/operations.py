@@ -82,7 +82,6 @@ class ServerOperations:
     def history_operation(self):
         history_operations = json.dumps(self.history)
         response_dict = {'status': 'ok', 'code': '206', 'history': history_operations}
-        #save_history(self.request_dict, response_dict, self.client_names, self.client_address, self.history)
         send_response(self.client_socket, response_dict)
 
     # Registra o nome de um cliente no servidor
