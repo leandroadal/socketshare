@@ -1,6 +1,7 @@
-from utils import list_files, send_response, save_history
 import json
 import os
+
+from utils import list_files, send_response, save_history
 
 
 # lida com a efetuação das operações do servidor
